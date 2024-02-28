@@ -1,4 +1,5 @@
 <?php
+require 'fungsi.php';
 // fungsi koneksi php
 $host = 'localhost';
 $user = 'root';
@@ -43,6 +44,7 @@ $result = mysqli_query($koneksi, $query);
                     <th>Jenis Kelamin</th>
                     <th>Warga Negara</th>
                     <th>Kota Asal</th>
+                    <th>Gambar</th>
                     <th>Keterangan</th>
                 </tr>
             </thead>
@@ -79,9 +81,13 @@ $result = mysqli_query($koneksi, $query);
                         <?= $bio['kota']; ?>
                     </td>
                     <td>
+                        <img src="img/<?= $bio['gambar']; ?>" width="100px" alt="None">
+                    </td>
+                    <td>
                         <?= $bio['keterangan']; ?>
                     </td>
                     </tr>
+                    <?php $no++; ?>
                 <?php endwhile; ?>
             </tbody>
         </table>

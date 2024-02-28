@@ -1,4 +1,5 @@
 <?php
+require 'fungsi.php';
 // fungsi koneksi php
 $host = 'localhost';
 $user = 'root';
@@ -18,6 +19,7 @@ $password = "";
 $radio = "";
 $wn = "";
 $kota = "";
+$gambar = "";
 $keterangan = "";
 
 $sukses = "";
@@ -32,11 +34,13 @@ if (isset($_POST["tambah"])) {
     $radio = $_POST["radio"];
     $wn = isset($_POST['wn']) ? $_POST['wn'] : '';
     $kota = $_POST["kota"];
+    // fungsi upload gambar
+    $gambar = upload();
     $keterangan = $_POST["keterangan"];
 
 
-    if ($nim && $nama && $ttl && $usia && $password && $radio && $wn && $kota && $keterangan) {
-        $query = "INSERT INTO biodata VALUES ('', '$nim', '$nama', '$ttl', '$usia', '$password', '$radio', '$wn', '$kota', '$keterangan')";
+    if ($nim && $nama && $ttl && $usia && $password && $radio && $wn && $kota && $gambar && $keterangan) {
+        $query = "INSERT INTO biodata VALUES ('', '$nim', '$nama', '$ttl', '$usia', '$password', '$radio', '$wn', '$kota', '$gambar', '$keterangan')";
         $result = mysqli_query($koneksi, $query);
 
         if ($result) {
@@ -76,7 +80,7 @@ if (isset($_POST["tambah"])) {
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-md-6">
                     <table class="table table-bordered">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <tr>
                                 <td>Nim Mahasiswa</td>
                                 <td>
@@ -146,6 +150,12 @@ if (isset($_POST["tambah"])) {
                                         <option value="Boyolali">Boyolali</option>
                                         <option value="Wonogiri">Wonogiri</option>
                                     </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Gambar</td>
+                                <td>
+                                    <input type="file" class="form-control" id="gambar" name="gambar" />
                                 </td>
                             </tr>
                             <tr>
